@@ -10,5 +10,8 @@ pip freeze > requirements.txt
 or
 pip install -r requirements.txt
 
-3. run the script
+3. prepare backup folder
+mkdir zone_backups
+
+4. run the script
 python backup.py
