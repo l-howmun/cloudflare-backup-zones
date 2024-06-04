@@ -18,10 +18,14 @@ session.headers.update({
 })
 
 def get_zones():
+    zones = []
     url = f'{BASE_URL}/zones'
-    response = session.get(url)
-    response.raise_for_status()  # Raise an exception for HTTP errors
-    zones = response.json()['result']
+    while url:
+        response = session.get(url)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        result = response.json()
+        zones.extend(result['result'])
+        url = result.get('result_info', {}).get('next', None)
     return zones
 
 def export_zone(zone_id, zone_name):
